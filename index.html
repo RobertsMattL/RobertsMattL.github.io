@@ -4,25 +4,72 @@
     <script>
 
 function myFunction() {
-  document.getElementById("demo").innerHTML = "Paragraph changed.";
+<!--  document.getElementById("demo").innerHTML = "Paragraph changed.";-->
 }
+	    //%!js-beautify
+
+	    //%!python -m json.tool
 
 window.addEventListener('load', (event) => {
- myFunction()
+
+var weather = httpGet('http://api.openweathermap.org/data/2.5/weather?lat=45.3317552&lon=-121.6673735&appid=1be896a7b9ad230c1002323f0d721b53')
+    
+		    setWeatherUi(JSON.parse(weather))
+    console.log(weather)
+
 });
 
 
-
-
-
-    </script>
-    <style>
-img {
-  width: 100%;
-  height: auto;
+function httpGet(theUrl)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
 }
 
 
+function setWeatherUi(weather)
+{
+    document.getElementById("weatherHeaderName").innerHTML = weather['name']
+    console.log(weather['name'])
+}
+
+    </script>
+    <style>
+    .wrapper {
+        background:#EFEFEF;
+        box-shadow: 1px 1px 10px #999;
+        margin: auto;
+        text-align: center;
+        position: relative;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        margin-bottom: 20px !important;
+        width: 800px;
+        padding-top: 5px;
+    }
+    .scrolls {
+        overflow-x: scroll;
+        overflow-y: hidden;
+        height: 80px;
+    white-space:nowrap
+    }
+    .imageDiv img {
+        box-shadow: 1px 1px 10px #999;
+        margin: 2px;
+        max-height: 50px;
+        cursor: pointer;
+    display:inline-block;
+    *display:inline;
+    *zoom:1;
+    vertical-align:top;
+    }
+.fit {
+  width: 100%;
+  height: auto;
+}
 
 
 
@@ -30,34 +77,50 @@ img {
 </head>
 <body>
 <h2>Weather Stoked Bro</h2>
-<img src="https://api.weatherflow.com/wxengine/rest/graph/getGraph?spot_id=82768&time_start=2022-01-27%2000:00:00&time_end=2022-01-27%2024:00:00&units_wind=mph&fields=wind&wf_token=4dc1fdef80688a9ec231fd3a851df3a9&color_plot_bg=0xFAFAFA&wind_speed_floor=31&graph_height=330&graph_width=465&type=line3&format=raw&v=1.1&cb=1643481814290">
-<img src="/images/0002.jpg">
-<img src="https://www.skihood.com/cams/vista">
-<img src="https://www.skihood.com/cams/base">
-<img src="https://www.skihood.com/cams/top">
-<img src="https://www.skihood.com/cams/sahale">
-<img src="https://www.skihood.com/cams/heath">
-<img src="https://www.skihood.com/cams/casc">
-<img src="https://www.skihood.com/cams/vstop">
-<img src="https://www.tripcheck.com/RoadCams/cams/US26%20at%20Firwood%20Rd_pid2331.JPG">
-<img src="https://www.tripcheck.com/RoadCams/cams/US26%20at%20Cherryville%20Dr_pid2332.JPG">
-<img src="https://www.tripcheck.com/RoadCams/cams/US26%20at%20Govt%20Camp%20Lp%20Rd_pid1776.JPG">
-<img src="https://tripcheck.com/RoadCams/cams/US26%20at%20Trillium%20Lake%20EB_pid1887.JPG">
-<img src="https://www.tripcheck.com/RoadCams/cams/US26%20EB%20at%20Arlie%20Mitchell%20Rd._pid1875.JPG">
-<img src="https://www.tripcheck.com/RoadCams/cams/US26%20at%20Frog%20Lake%20VMS_pid1773.JPG">
-<img src="https://www.tripcheck.com/RoadCams/cams/US26%20Near%20Warm%20Springs_pid1742.JPG">
-<img src="https://www.tripcheck.com/RoadCams/cams/Blue%20Box%20Pass_pid1919.JPG">
-<img src="https://tripcheck.com/RoadCams/cams/US26%20at%20ORE216%20Jct_pid3822.JPG">
-<img src="http://www.mthood.info/cameras/mt-hood-webCam-blueboxpass.html">
-<img src="https://www.tripcheck.com/RoadCams/cams/US26%20at%20Hwy35_pid1881.JPG">
-<img src="https://www.tripcheck.com/RoadCams/cams/GovernmentCamp_pid624.jpg">
-<img src="https://tripcheck.com/RoadCams/cams/US26%20at%20Govn%20Camp%20Maint_pid1899.JPG">
-<img src="https://tripcheck.com/RoadCams/cams/US26%20at%20Ski%20Bowl%20West%20EB_pid4117.jpg">
-<img src="https://www.tripcheck.com/RoadCams/cams/Brightwood2_pid1381.jpg">
-<img src="https://www.tripcheck.com/RoadCams/cams/ZigZag_pid1511.jpg">
-<img src="http://209.216.188.4:81/axis-cgi/jpg/image.cgi">
-<img src="http://pdxgreen.com/images/netcam.jpg">
-<img src="http://w3.gorge.net/niknas/webcam.jpg">
-<img src="http://www.gorge.net/cameras/sandbar/sandbarimage.jpg">
+<div>
+	<h2 id="weatherHeaderName"></h2>
+</div>
+<!--<div class="wrapper" style="'width=100%'">-->
+<!--    <div class="scrolls">-->
+<!--        <img width="50px" height="50px" src="https://api.weather.gov/icons/land/day/sct?size=small"/>-->
+<!--        <img width="50px" height="50px" src="https://api.weather.gov/icons/land/day/sct?size=small"/>-->
+<!--        <img width="50px" height="50px" src="https://api.weather.gov/icons/land/day/sct?size=small"/>-->
+<!--        <img width="50px" height="50px" src="https://api.weather.gov/icons/land/day/sct?size=small"/>-->
+<!--        <img width="50px" height="50px" src="https://api.weather.gov/icons/land/day/sct?size=small"/>-->
+<!--        <img width="50px" height="50px" src="https://api.weather.gov/icons/land/day/sct?size=small"/>-->
+<!--        <img width="50px" height="50px" src="https://api.weather.gov/icons/land/day/sct?size=small"/>-->
+<!--        <img width="50px" height="50px" src="https://api.weather.gov/icons/land/day/sct?size=small"/>-->
+<!--    </div>-->
+<!--</div>-->
+<img class="fit"
+     src="https://api.weatherflow.com/wxengine/rest/graph/getGraph?spot_id=82768&time_start=2022-01-27%2000:00:00&time_end=2022-01-27%2024:00:00&units_wind=mph&fields=wind&wf_token=4dc1fdef80688a9ec231fd3a851df3a9&color_plot_bg=0xFAFAFA&wind_speed_floor=31&graph_height=330&graph_width=465&type=line3&format=raw&v=1.1&cb=1643481814290">
+<img class="fit" src="/images/0002.jpg">
+<img class="fit" src="https://www.skihood.com/cams/vista">
+<img class="fit" src="https://www.skihood.com/cams/base">
+<img class="fit" src="https://www.skihood.com/cams/top">
+<img class="fit" src="https://www.skihood.com/cams/sahale">
+<img class="fit" src="https://www.skihood.com/cams/heath">
+<img class="fit" src="https://www.skihood.com/cams/casc">
+<img class="fit" src="https://www.skihood.com/cams/vstop">
+<img class="fit" src="https://www.tripcheck.com/RoadCams/cams/US26%20at%20Firwood%20Rd_pid2331.JPG">
+<img class="fit" src="https://www.tripcheck.com/RoadCams/cams/US26%20at%20Cherryville%20Dr_pid2332.JPG">
+<img class="fit" src="https://www.tripcheck.com/RoadCams/cams/US26%20at%20Govt%20Camp%20Lp%20Rd_pid1776.JPG">
+<img class="fit" src="https://tripcheck.com/RoadCams/cams/US26%20at%20Trillium%20Lake%20EB_pid1887.JPG">
+<img class="fit" src="https://www.tripcheck.com/RoadCams/cams/US26%20EB%20at%20Arlie%20Mitchell%20Rd._pid1875.JPG">
+<img class="fit" src="https://www.tripcheck.com/RoadCams/cams/US26%20at%20Frog%20Lake%20VMS_pid1773.JPG">
+<img class="fit" src="https://www.tripcheck.com/RoadCams/cams/US26%20Near%20Warm%20Springs_pid1742.JPG">
+<img class="fit" src="https://www.tripcheck.com/RoadCams/cams/Blue%20Box%20Pass_pid1919.JPG">
+<img class="fit" src="https://tripcheck.com/RoadCams/cams/US26%20at%20ORE216%20Jct_pid3822.JPG">
+<img class="fit" src="http://www.mthood.info/cameras/mt-hood-webCam-blueboxpass.html">
+<img class="fit" src="https://www.tripcheck.com/RoadCams/cams/US26%20at%20Hwy35_pid1881.JPG">
+<img class="fit" src="https://www.tripcheck.com/RoadCams/cams/GovernmentCamp_pid624.jpg">
+<img class="fit" src="https://tripcheck.com/RoadCams/cams/US26%20at%20Govn%20Camp%20Maint_pid1899.JPG">
+<img class="fit" src="https://tripcheck.com/RoadCams/cams/US26%20at%20Ski%20Bowl%20West%20EB_pid4117.jpg">
+<img class="fit" src="https://www.tripcheck.com/RoadCams/cams/Brightwood2_pid1381.jpg">
+<img class="fit" src="https://www.tripcheck.com/RoadCams/cams/ZigZag_pid1511.jpg">
+<img class="fit" src="http://209.216.188.4:81/axis-cgi/jpg/image.cgi">
+<img class="fit" src="http://pdxgreen.com/images/netcam.jpg">
+<img class="fit" src="http://w3.gorge.net/niknas/webcam.jpg">
+<img class="fit" src="http://www.gorge.net/cameras/sandbar/sandbarimage.jpg">
 </body>
 </html>
